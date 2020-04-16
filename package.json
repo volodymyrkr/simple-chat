@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-server": "nodemon server/src/server.js",
-    "start-client": "nodemon client/src/client.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-server": "nodemon src/apps/chat/server/server.js",
+    "start-client": "nodemon src/apps/chat/client/client.js",
+    "test":         "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
