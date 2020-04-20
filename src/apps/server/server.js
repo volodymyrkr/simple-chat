@@ -1,6 +1,14 @@
 const http = require('http');
 const url = require('url');
 
+const debug = require('debug')('module-name:specific-param');
+const log = require('winston');
+
+debug("Hello");
+log.info("Hello");
+log.debug("Hello");
+log.error("Hello");
+
 const server = new http.Server();
 server.listen(2000, 'localhost');
 let emit = server.emit;
@@ -32,4 +40,3 @@ server.on('request', function(req, res) {
 
   res.end(`Hello, Server counter ${counter}`);
 });
-
