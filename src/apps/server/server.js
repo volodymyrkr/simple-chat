@@ -1,4 +1,5 @@
 const http = require('http');
+const url = require('url');
 
 const server = new http.Server();
 server.listen(2000, 'localhost');
@@ -11,5 +12,22 @@ server.emit = function(event) {
 
 let counter = 0;
 server.on('request', function(req, res) {
-  res.end(`Server counter ${++counter}`);
+  const { method } = req;
+  const parsedUrl = url.parse(req.url, true)
+  const pathName = parsedUrl.pathname;
+
+  if (method === 'GET') {
+    if (pathName === '/clean') {
+      counter = 0;
+    }
+    else if (pathName === '/init') {
+      counter = parsedUrl.query.value;
+    }
+    else {
+      ++counter;
+    }
+  }
+
+  res.end(`Hello, Server counter ${counter}`);
 });
+
