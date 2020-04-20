@@ -16,6 +16,8 @@ server.on('request', function(req, res) {
   const parsedUrl = url.parse(req.url, true)
   const pathName = parsedUrl.pathname;
 
+  debugger;
+
   if (method === 'GET') {
     if (pathName === '/clean') {
       counter = 0;
