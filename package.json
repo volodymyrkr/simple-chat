@@ -6,7 +6,7 @@
   "scripts": {
     "start-server": "nodemon src/apps/chat/server/server.js",
     "start-client": "nodemon src/apps/chat/client/client.js",
-    "test":         "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +14,10 @@
     "nodemon": "^2.0.3",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "nodeJS": "^1.0.0",
+    "winston": "^3.2.1"
   }
 }
