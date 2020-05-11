@@ -1,9 +1,9 @@
-const MyLog = require('./utils/log');
+const logger = require('./utils/log');
 
 const express = require('express');
 const app = express();
 
-MyLog.log("Hello", {"data": "asdasd"});
+logger.debug("server", {"data": "asdasd"});
 
 app.use('/*', function(req, res, next){
   console.log("Hello from server");
