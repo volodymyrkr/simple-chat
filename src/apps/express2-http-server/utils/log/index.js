@@ -1,11 +1,14 @@
 const winston = require('winston');
 
-const MyLog = function() {
-  console.log('Logging is initialized');
-}
-
-MyLog.prototype.log = function() {
+function log() {
   console.log(...arguments);
 }
 
-module.exports = MyLog;
+function info() {
+  console.info(...arguments);
+}
+
+module.exports = {
+  log: log,
+  info: info,
+}
