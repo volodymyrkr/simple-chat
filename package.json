@@ -3,10 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "@comment bin": [
+      "This section is created to run custom node scripts",
+      "to get more infomation follow by link",
+      "https://stackoverflow.com/questions/36433461/how-do-i-add-a-custom-script-to-my-package-json-file-that-runs-a-javascript-file",
+      "Execute `npm link` before any links execution"
+    ],
+    "express": "src/apps/bin/express-runner.js",
+    "express2": "src/apps/bin/express2-runner.js"
+  },
   "scripts": {
     "start-server": "nodemon src/apps/chat/server/server.js",
     "start-client": "nodemon src/apps/chat/client/client.js",
-    "start-express": "nodemon src/apps/express-http-server/index.js",
+    "watch-express": "supervisor src/apps/express-http-server/index.js",
+    "start-express": "node src/apps/express-http-server/index.js",
+    "express": "npm run start-express && npm run watch-express",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -20,6 +32,7 @@
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "nodeJS": "^1.0.0",
+    "shelljs": "^0.8.4",
     "winston": "^3.2.1"
   }
 }

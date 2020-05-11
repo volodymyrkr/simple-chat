@@ -6,13 +6,13 @@ serverApp.use(middlewareFunction);
 serverApp.get('/*', rootHandler);
 
 function middlewareFunction(req, res, next) {
-  console.log(req.searchParams);
+  console.log(req);
   next();
 }
 
 function rootHandler(req, res, next) {
-  console.log(req.searchParams);
+  console.log(req);
   res.end("Hello from server");
 }
 
-serverApp.listen(8090);
+serverApp.listen(8092);
