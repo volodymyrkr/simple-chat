@@ -10,8 +10,9 @@
       "https://stackoverflow.com/questions/36433461/how-do-i-add-a-custom-script-to-my-package-json-file-that-runs-a-javascript-file",
       "Execute `npm link` before any links execution"
     ],
-    "express": "src/apps/bin/express-runner.js",
-    "express2": "src/apps/bin/express2-runner.js"
+    "express": "./scripts/express-runner.js",
+    "express2": "./scripts/express2-runner.js",
+    "bundled-server": "./scripts/bundled-http-server-runner.js"
   },
   "scripts": {
     "start-server": "nodemon src/apps/chat/server/server.js",
