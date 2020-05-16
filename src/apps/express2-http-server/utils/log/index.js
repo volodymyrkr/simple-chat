@@ -47,15 +47,34 @@ let logger = winston.createLogger({
   exitOnError: false, // do not exit on handled exceptions
 });
 
+// Available log levels
+// for cli and npm levels
+// error,warn,help,data,info,debug,prompt,http,verbose,input,silly: LeveledLogMethod;
+
+// for syslog levels only
+// emerg,alert,crit,warning,notice: LeveledLogMethod;
+
+function parseArguments(data) { // Winston doesn't handle list of arguments
+  let result = [...arguments].map(function (item) {
+    return `${JSON.stringify(item)}`;
+  }).reduce((result, item) => `${result} ${item}`);
+  return result;
+}
+
 function debug() {
-  logger.log('debug', ...arguments);
+  logger.debug(parseArguments(...arguments));
 }
 
 function info() {
-  logger.info('info', ...arguments);
+  logger.info(JSON.stringify(arguments));
+}
+
+function http() {
+  logger.http(JSON.stringify(arguments));
 }
 
 module.exports = {
   debug: debug,
   info: info,
+  http: http,
 }
