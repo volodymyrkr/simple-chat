@@ -1,4 +1,4 @@
-#! /usr/scripts/env node
+#! /usr/bin/env node
 var shell = require("shelljs");
 
 shell.exec("supervisor ./src/apps/express-http-server/index.js");

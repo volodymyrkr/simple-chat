@@ -12,7 +12,8 @@
     ],
     "express": "./scripts/express-runner.js",
     "express2": "./scripts/express2-runner.js",
-    "bundled-server": "./scripts/bundled-http-server-runner.js"
+    "bundled-server": "./scripts/bundled-http-server-runner.js",
+    "login-server": "./scripts/login-http-server-runner.js"
   },
   "scripts": {
     "start-server": "nodemon src/apps/chat/server/server.js",
