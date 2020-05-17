@@ -7,6 +7,8 @@ server.use('/*', function(req, res, next) {
   next();
 });
 
+server.use('/static', express.static(__dirname + '/public'));
+
 server.get('/index.html', function(req, res, next) {
   const mainHtml = require('./main-page');
   console.log(`Params: ${req.query.version}`);

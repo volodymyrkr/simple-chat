@@ -7,6 +7,7 @@ function generateHtml(version) {
     '<h1>Main Page</h1>' +
     `<h3>Version <div id="version">${version}</div></h3>` +
     '<script type="text/javascript" src="./bundles/index.js">no script</script>' +
+    '<script type="text/javascript" src="./static/index.js">no script</script>' +
     '</body>' +
     '</html>';
 
