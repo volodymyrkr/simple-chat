@@ -20,8 +20,17 @@ server.get('/users', (req, res, next) => {
 
 server.get('/add', (req, res, next) => {
   console.log(req.query)
+  users.push({
+    name: req.query.user,
+    password: 'nopass'
+  })
   res.writeHead(200, {"Content-type": "text.html"});
-  res.end(JSON.stringify(req.query));
+  res.end(JSON.stringify({
+      result: 200,
+      ...req.query,
+      ...users,
+  }
+  ));
 });
 
 server.listen(3008);
