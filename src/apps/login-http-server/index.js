@@ -12,7 +12,7 @@ server.use('/*', (req, res, next) => {
   next();
 });
 
-server.use('/static', express.static(__dirname + '/build'));
+server.use(express.static(__dirname + '/build/'));
 
 server.get('/users', (req, res, next) => {
   res.json(users);
