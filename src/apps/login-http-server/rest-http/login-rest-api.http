@@ -1,0 +1,6 @@
+GET http://localhost:3008/users
+Accept: */*
+Cache-Control: no-cache
+
+###
+
