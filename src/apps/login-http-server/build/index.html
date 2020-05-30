@@ -1,21 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 <body>
-    <div>
-        <div id="usersList"></div>
-    </div>
-    <input id="getUsersBtn" type="button" value="Get Users" onclick="getUsersHandler()"></input>
-    <div>
-        <input id="newUserName" type="text"/>
-        <input id="addNewUserButton" type="button" value="Add" onclick="addNewUserClick()"/>
-    </div>
-    <script type="text/javascript" src="./index.js"></script>
+  <div id="lastActionCode"/>
+  <div>
+    <form action="/add" method="get">
+      <p>User name:<input id="userName" type="text"/></p>
+      <p>User pass:<input id="userPass" type="password"/></p>
+      <input id="addNewUserButton" type="button" value="Add" onclick="addNewUserClick()"/>
+    </form>
+  </div>
+  <input id="getUsersBtn" type="button" value="Get Users" onclick="getUsersHandler()"></input>
+  <input id="clearUserListBtn" type="button" value="Clear" onclick="clearUserListHandler()"></input>
+  <div>
+    <div id="usersList"></div>
+  </div>
+  <script type="text/javascript" src="./index.js"></script>
 </body>
 </html>
