@@ -4,10 +4,11 @@ const bcrypt = require('bcrypt');
 const server = express();
 
 server.use(express.static(__dirname +'/public/'));
+server.set('view-engine', 'ejs');
 
 server.get('/login', (req, res, next) => {
   console.log("Connection");
-  res.render(__dirname +'/views/login.ejs');
+  res.render(__dirname +'/views/login.ejs', { message: "Welcome!!!"});
 });
 
 server.post('/login', (req, res, next) => {
