@@ -30,6 +30,7 @@ function addNewUserClick() {
     .then( response => handleErrors(response)) // handle clear user list errors
     .then( response => {
       if (response.code === 200) {
+        alert(response.message);
         getUsersHandler();
       }
     });
@@ -38,6 +39,17 @@ function addNewUserClick() {
 function handleErrors(response) {
   if (response.code !== 200) {
     console.error(`Error code: ${response.result} result: ${JSON.stringify(response)}`);
+    switch (response.code) {
+      case 401: // user name is missed
+        break
+      case 402: // user pass is missed
+        break
+      case 403: // user name is already in base
+        break
+      default:
+        break;
+    }
+    alert(response.message);
   }
   return response;
 }
