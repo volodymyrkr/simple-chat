@@ -1,13 +1,13 @@
-<h2><%= data %></h2>
+<h2><%= message %></h2>
 <h2>Login form:</h2>
 <form action="/login" method="POST">
     <div>
         <label>Name:</label>
-        <input type="text" required/>
+        <input id="user" name="user" type="text" required/>
     </div>
     <div>
         <label>Pass:</label>
-        <input type="password" required/>
+        <input id="pass" name="pass" type="password" required/>
     </div>
     <input type="submit"/>
 </form>
