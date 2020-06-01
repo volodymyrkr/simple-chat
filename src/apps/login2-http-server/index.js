@@ -62,13 +62,8 @@ function comparePassword(password, passHash) {
 }
 
 async function comparePasswordAsync(password, passHash) {
-  try {
-    const match = await bcrypt.compare(password, passHash);
-    return match;
-  } catch (e) {
-    return false;
-  }
-  return false;
+  const match = await bcrypt.compare(password, passHash);
+  return match;
 }
 
 function validateUser(data) {
@@ -82,7 +77,11 @@ function validateUser(data) {
     console.log(userData);
     let isUserLogged = false;
     // isUserLogged = comparePassword(data.pass, userData.pass);
-    isUserLogged = comparePasswordAsync(data.pass, userData.pass);
+    try {
+      isUserLogged = comparePasswordAsync(data.pass, userData.pass);
+    } catch (e) {
+      isUserLogged = false;
+    }
     console.log(21);
     console.log(isUserLogged);
     console.log(12);
