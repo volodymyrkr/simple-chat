@@ -4,9 +4,14 @@ const bcrypt = require('bcrypt');
 
 const server = express();
 const users = [
-  {name: 'asd', pass: 'asd', email: ""},
-  {name: 'qwe', pass: 'qwe', email: ""}
-]
+  // {name: 'asd', pass: 'asd', email: ""},
+  // {name: 'qwe', pass: 'qwe', email: ""}
+];
+
+// users.push(registerUser({user: 'asd', pass: 'asd', email: "asd@asd"}));
+// users.push(registerUser({user: 'qwe', pass: 'qwe', email: "qwe@asd"}));
+
+console.log(users);
 
 server.use(cookieSession({
   name: 'session',
@@ -20,17 +25,23 @@ server.use(express.urlencoded({extended: false}));
 server.set('view-engine', 'ejs');
 
 server.get('/login', (req, res, next) => {
-  console.log(req.session);
-  res.render(__dirname +'/views/login.ejs', { message: `Welcome!!! ${req.session.user}`});
+  // console.log(req.session);
+  res.render(__dirname +'/views/login.ejs', { message: `Login!!! ${req.session.user}`});
 });
 
 server.post('/login', (req, res, next) => {
   console.log(JSON.stringify(req.body));
-  if (!validateUser(req.body)) {
+  let result = validateUser(req.body);
+  console.log(result);
+  if (!result) {
+    console.log(11);
     res.redirect("/login");
+    res.end();
+  } else {
+    console.log(22);
+    req.session.user = req.body.user;
+    res.redirect("/welcome");
   }
-  req.session.user = req.body.user;
-  res.redirect("/welcome");
 });
 
 server.get('/welcome', (req, res, next) => {
@@ -42,23 +53,53 @@ server.get('/welcome', (req, res, next) => {
 
 server.get('/logout', (req, res, next) => {
   req.session.user = null;
-  res.render(__dirname +'/views/welcome.ejs', {
-    user: req.session.user
-  });
+  res.redirect('/welcome');
 });
 
-function validateUser(data) {
-  return users.some((user) => user.name === data.user && user.pass === data.pass);
+function comparePassword(password, passHash) {
+  const match = bcrypt.compareSync(password, passHash);
+  return match;
 }
 
-function addUser(data) {
+function validateUser(data) {
+  console.log("------------------");
+  console.log(users);
+  console.log("==================");
+  console.log(data.user);
+  console.log("++++++++++++++++++");
+  if (users.some((user) => user.name === data.user)) {
+    const userData = users.find((user) => user.name === data.user);
+    console.log(userData);
+    let isUserLogged = false;
+    isUserLogged = comparePassword(data.pass, userData.pass);
+    console.log(21);
+    console.log(isUserLogged);
+    console.log(12);
+
+    return isUserLogged
+  }
+  console.log(1);
+  return false;
+}
+
+async function addUser(data) {
   if (!validateUser(data)) {
+    let hashPass;
+    try {
+       hashPass = await bcrypt.hash(data.pass, 1);
+    } catch {
+      return null;
+    }
     users.push({
+      id: Date.now().toString(),
       name: data.user,
-      pass: data.pass,
+      pass: hashPass,
       email: data.email,
     });
   }
+  console.log("11111111111111");
+  console.log(users);
+  console.log("22222222222222");
   return users.find(user => user.name === data.user);
 }
 
@@ -66,19 +107,22 @@ server.get('/register', (req, res, next) => {
   res.render(__dirname +'/views/register.ejs');
 });
 
-server.post('/register', (req, res, next) => {
-  const addedUser = addUser(req.body);
+server.post('/register', async (req, res, next) => {
+  const addedUser = await registerUser(req.body);
   if (!!addedUser) {
     req.session = {
       user: addedUser.name
     };
-    // console.log(`Registered as ${JSON.stringify(req.session)}`);
-    // res.end(`Registered as ${JSON.stringify(req.session)}`);
-    res.render(__dirname + '/views/welcome.ejs', {
-      user: req.session.user
-    })
+    console.log(addedUser);
+    res.redirect('/welcome');
   }
 });
+
+async function registerUser(data) {
+  const user = await addUser(data);
+  console.log(user);
+  return user;
+}
 
 
 server.listen(3009);
